@@ -1,8 +1,8 @@
 import java.util.*;
-public class FlamesCalculator{
+public class FlamesCalculator implements Calculator{
 
 	public static String removeSpaceAndLowerCase(String str){
-		return str.replaceAll(" ", "").toLowerCase();		
+		return str.replaceAll(" ", "").toLowerCase();
 	}
 	public String getResults(String first, String second){
 		int length = first.length()+second.length();
@@ -26,12 +26,12 @@ public class FlamesCalculator{
 			flames_check[i] = true;
 		}
 
-		int count = 6;
-		int k=1,deleted_letters=0;
+		int flamesCount = 6;
+		int k=1,deletedLetters=0;
 		int j;
-		for(j=0;j<=count;j++){
+		for(j=0;j<=flamesCount;j++){
 			if(k <= length){
-				if(j == count){
+				if(j == flamesCount){
 					j=0;
 				}
 				if(flames_check[j] == true){
@@ -39,31 +39,25 @@ public class FlamesCalculator{
 				}
 			}
 			if((k-1)==length){
-				deleted_letters = deleted_letters+1;
+				deletedLetters = deletedLetters+1;
 				flames_check[j] = false;
 				k = 1;
 			}
-			if(deleted_letters==6){
-				if(j==0){
-					return "FRIENDSHIP";
-				}else if(j==1){
-					return "LOVE";
-				}else if(j==2){
-					return "AFFECTION";
-				}else if(j==3){
-					return "MARRIAGE";
-				}else if(j==4){
-					return "ENEMY";
-				}else if(j==5){
-					return "SIBLING";
+			if(deletedLetters==6){
+				switch (j){
+					case 0: return "FRIENDSHIP";
+					case 1: return "LOVE";
+					case 2: return "AFFECTION";
+					case 3: return "MARRIAGE";
+					case 4: return "ENEMY";
+					case 5: return "SIBLING";
+
 				}
 					break;
 			}
 		}
+
+		return "";
 	}
-	
 
-
-
-	
 }

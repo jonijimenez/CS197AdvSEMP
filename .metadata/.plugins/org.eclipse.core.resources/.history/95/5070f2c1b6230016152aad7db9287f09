@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class FlamesCalculator implements Calculator{
+	
+	String FlamesArray[] = {"Friendship","Love","Affection","Marriage","Enemy","Sibling"};
+	ArrayList<String> Flames = new ArrayList<String>(Arrays.asList(FlamesArray));
+	
+	public String getResults(String first, String second){
+		return getFlamesResult(first, second);
+	}
+	
+	
+	public String getFlamesResult(String first, String second){
+		first = removeSpaceAndLowerCase(first);
+		second = removeSpaceAndLowerCase(second);
+		
+		if(first.equals(second))
+			return Flames.get(0);
+		else{
+			//Remove similar letters in both strings
+			int i=0;
+			while(true){
+				
+				//Remove similar strings
+				if(i==first.length())
+					break;
+				if(second.contains(first.charAt(i)+"")){
+					second = second.replaceAll(first.charAt(i)+"", "");
+					first = first.replaceAll(first.charAt(i)+"", "");
+				}
+				else
+					i++;
+			}
+			
+			//Count remaining string
+			int count = first.length() + second.length();
+			
+			//Count according to remaining string
+			ArrayList<String> FlamesCopy = (ArrayList<String>)(Flames.clone());
+			
+			return countFlames(FlamesCopy, count);
+		}
+	}
+	
+	public String removeSpaceAndLowerCase(String str){
+		return str.replaceAll(" ", "").toLowerCase();		
+	}
+	
+	public String countFlames(ArrayList<String> FlamesList, int count){
+		int iter=0;
+		while(FlamesList.size()!=1){
+			iter = (iter+count-1)%FlamesList.size();
+			FlamesList.remove(iter);	
+		}
+		return FlamesList.get(0);
+	}
+	
+}
