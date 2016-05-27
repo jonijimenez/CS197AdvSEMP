@@ -6,7 +6,7 @@ public class NamesInputValidator implements InputValidator{
 	}
 
 	public boolean checkNames(String input){
-		if(input.matches("[A-Za-z\\s]+,[A-Za-z\\s]+"))
+		if(input.matches("([A-Za-z]+(\\s)?)+,([A-Za-z]+(\\s)?)+"))
 				return true;
 		return false;
 		

@@ -65,4 +65,12 @@ public class NamesInputValidatorTest {
 		boolean input = inputValidate.checkInput("Monkey D. Luffy,Nico Robin");
 		assertEquals(false, input);
 	}
+
+	@Test
+	public void testSpacesOnly(){
+		boolean input = inputValidate.checkInput(" , ");
+		assertEquals(false, input);
+	}
+
+
 }
