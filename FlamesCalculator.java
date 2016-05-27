@@ -5,11 +5,14 @@ public class FlamesCalculator implements Calculator{
 		return str.replaceAll(" ", "").toLowerCase();
 	}
 	public String getResults(String first, String second){
+		first = removeSpaceAndLowerCase(first);
+		second = removeSpaceAndLowerCase(second);
+
 		int length = first.length()+second.length();
+		String relationship = "";
 		boolean name_check[] = new boolean[second.length()];
-		for(int i=0;i<second.length();i++){
-			name_check[i]=false;
-		}
+
+
 
 		for(int i=0;i<first.length();i++){
 			for(int j=0;j<second.length();j++){
@@ -24,40 +27,44 @@ public class FlamesCalculator implements Calculator{
 		boolean flames_check[] = new boolean[6];
 		for(int i=0;i<6;i++){
 			flames_check[i] = true;
-		}
+	}
 
-		int flamesCount = 6;
-		int k=1,deletedLetters=0;
+		int count = 6;
+		int k=1,deleted_letters=0;
 		int j;
-		for(j=0;j<=flamesCount;j++){
+		for(j=0;j<=count;j++){
 			if(k <= length){
-				if(j == flamesCount){
+				if(j == count){
 					j=0;
 				}
 				if(flames_check[j] == true){
 					k = k+1;
 				}
 			}
+
 			if((k-1)==length){
-				deletedLetters = deletedLetters+1;
+				deleted_letters = deleted_letters+1;
 				flames_check[j] = false;
 				k = 1;
 			}
-			if(deletedLetters==6){
-				switch (j){
-					case 0: return "FRIENDSHIP";
-					case 1: return "LOVE";
-					case 2: return "AFFECTION";
-					case 3: return "MARRIAGE";
-					case 4: return "ENEMY";
-					case 5: return "SIBLING";
 
+			if(deleted_letters==6){
+				if(j==0){
+				relationship = "FRIENDSHIP";
+				}else if(j==1){
+				relationship = "LOVE";
+				}else if(j==2){
+				relationship = "AFFECTION";
+				}else if(j==3){
+				relationship = "MARRIAGE";
+				}else if(j==4){
+				relationship = "ENEMIES";
+				}else if(j==5){
+				relationship = "SIBLING";
 				}
-					break;
+			break;
 			}
 		}
-
-		return "";
+		return relationship;
 	}
-
 }
